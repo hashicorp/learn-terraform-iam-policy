@@ -11,10 +11,13 @@ provider "aws" {
   region = var.region
 }
 
-
 resource "random_pet" "pet_name" {
   length    = 3
   separator = "-"
+}
+
+resource "aws_iam_user" "new_user" {
+  name = "new_user"
 }
 
 resource "aws_s3_bucket" "bucket" {
@@ -58,3 +61,4 @@ resource "aws_iam_policy" "policy" {
 }
 EOT
 }
+
