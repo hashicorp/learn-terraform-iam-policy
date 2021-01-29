@@ -11,24 +11,13 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
+resource "random_pet" "pet_name" {
+  length    = 3
+  separator = "-"
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "test-bucket-${uuid()}"
+  bucket = "${random_pet.pet_name.id}_bucket"
   acl    = "private"
 
   tags = {
@@ -50,7 +39,7 @@ data "aws_iam_policy_document" "example" {
 
 
 resource "aws_iam_policy" "policy" {
-  name        = "test_policy_${uuid()}"
+  name        = "${random_pet.pet_name.id}_policy"
   description = "My test policy"
 
   policy = data.aws_iam_policy_document.example.json
@@ -60,8 +49,7 @@ resource "aws_iam_user" "new_user" {
   name = "new_user"
 }
 
-resource "aws_iam_policy_attachment" "test-attach" {
-  name       = "test-attachment"
+resource "aws_iam_user_policy_attachment" "attachment" {
+  user       = aws_iam_user.new_user.name
   policy_arn = aws_iam_policy.policy.arn
-  users      = [aws_iam_user.new_user.name]
 }
