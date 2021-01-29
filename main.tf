@@ -17,6 +17,16 @@ resource "random_pet" "pet_name" {
   separator = "-"
 }
 
+resource "aws_s3_bucket" "bucket" {
+  bucket = "${random_pet.pet_name.id}_bucket"
+  acl    = "private"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
+}
+
 resource "aws_iam_policy" "policy" {
   name        = "${random_pet.pet_name.id}_policy"
   description = "My test policy"
