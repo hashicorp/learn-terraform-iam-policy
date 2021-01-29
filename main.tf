@@ -12,8 +12,13 @@ provider "aws" {
 }
 
 
+resource "random_pet" "pet_name" {
+  length    = 3
+  separator = "-"
+}
+
 resource "aws_iam_policy" "policy" {
-  name        = "test_policy"
+  name        = "${random_pet.pet_name.id}_policy"
   description = "My test policy"
 
   policy = <<EOT
