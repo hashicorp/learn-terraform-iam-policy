@@ -16,6 +16,10 @@ resource "random_pet" "pet_name" {
   separator = "-"
 }
 
+resource "aws_iam_user" "new_user" {
+  name = "new_user"
+}
+
 resource "aws_s3_bucket" "bucket" {
   bucket = "${random_pet.pet_name.id}_bucket"
   acl    = "private"
@@ -44,9 +48,6 @@ resource "aws_iam_policy" "policy" {
 
   policy = data.aws_iam_policy_document.example.json
 
-}
-resource "aws_iam_user" "new_user" {
-  name = "new_user"
 }
 
 resource "aws_iam_user_policy_attachment" "attachment" {
