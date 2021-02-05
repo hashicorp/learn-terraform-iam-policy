@@ -21,7 +21,7 @@ resource "aws_iam_user" "new_user" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${random_pet.pet_name.id}_bucket"
+  bucket = "${random_pet.pet_name.id}-bucket"
   acl    = "private"
 
   tags = {
@@ -31,7 +31,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "${random_pet.pet_name.id}_policy"
+  name        = "${random_pet.pet_name.id}-policy"
   description = "My test policy"
 
   policy = <<EOT
