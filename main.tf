@@ -46,7 +46,7 @@ resource "aws_iam_policy" "policy" {
       "Resource": "*"
     }
 
-  ]
+  ],
 "Statement": [
     {
       "Action": [
