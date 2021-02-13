@@ -44,10 +44,7 @@ resource "aws_iam_policy" "policy" {
       ],
       "Effect": "Allow",
       "Resource": "*"
-    }
-
-  ],
-"Statement": [
+    },
     {
       "Action": [
         "s3:*"
@@ -57,7 +54,6 @@ resource "aws_iam_policy" "policy" {
     }
 
   ]
-
 }
 EOT
 }
