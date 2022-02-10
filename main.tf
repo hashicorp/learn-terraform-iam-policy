@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.24.1"
+      version = "4.0.0"
     }
   }
 }
@@ -22,12 +22,17 @@ resource "aws_iam_user" "new_user" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "${random_pet.pet_name.id}_bucket"
-  acl    = "private"
 
   tags = {
     Name        = "My bucket"
     Environment = "Dev"
   }
+}
+
+resource "aws_s3_bucket_acl" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+
+  acl = "private"
 }
 
 data "aws_iam_policy_document" "example" {
