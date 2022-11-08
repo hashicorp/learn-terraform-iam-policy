@@ -1,3 +1,4 @@
 # Create IAM policies with Terraform
 
-This is a companion repository to the Terraform IAM policy creation tutorial on [HashiCorp Learn](https://learn.hashicorp.com/tutorials/terraform/aws-iam-policy).
+This is a companion repository for the Hashicorp [IAM policy creation tutorial](https://developer.hashicorp.com/terraform/tutorials/aws/aws-iam-policy). 
+It contains Terraform configuration files for you to use to learn how to configure an AWS IAM policy.
