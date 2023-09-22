@@ -9,7 +9,6 @@ provider "aws" {
       Hashicorp-Learn = "aws-iam-policy"
     }
   }
-
 }
 
 resource "random_pet" "pet_name" {
@@ -28,12 +27,6 @@ resource "aws_s3_bucket" "bucket" {
     Name        = "My bucket"
     Environment = "Dev"
   }
-}
-
-resource "aws_s3_bucket_acl" "bucket" {
-  bucket = aws_s3_bucket.bucket.id
-
-  acl = "private"
 }
 
 resource "aws_iam_policy" "policy" {
